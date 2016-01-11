@@ -1,4 +1,4 @@
-# bookmarklets
+# bookmarklets-library
 
 To install the bookmarklets, please visit the [Accessibility Bookmarklets website](https://accessibility-bookmarklets.org).
 
