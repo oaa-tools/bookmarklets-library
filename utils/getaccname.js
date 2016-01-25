@@ -222,10 +222,8 @@ export function nameFromNativeSemantics (element, recFlag = false) {
 *   with name property set to a string that is a space-separated concatena-
 *   tion of those results if any, otherwise return null.
 */
-/* eslint no-console: 0 */
 function nameFromAttributeIdRefs (element, attribute) {
   let value = getAttributeValue(element, attribute);
-  console.log("Never got here...");
   let idRefs, i, refElement, accName, arr = [];
 
   if (value.length) {
