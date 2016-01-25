@@ -26,6 +26,7 @@
   },
   "scripts": {
     "build": "webpack -p",
+    "debug": "webpack",
     "lint": "eslint *.js utils/*.js"
   }
 }
