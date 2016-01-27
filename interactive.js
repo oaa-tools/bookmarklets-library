@@ -3,14 +3,8 @@
 */
 
 import Bookmarklet from './Bookmarklet';
+import InfoObject from './InfoObject';
 import { interactiveCss } from './utils/dom';
-import {
-  getAccessibleName,
-  getAccessibleDesc,
-  getGroupingLabels
-} from './utils/getaccname';
-import { getElementInfo } from './utils/info';
-import { getAriaRole } from './utils/roles';
 
 /*
 *   Interactive elements as defined by HTML5:
@@ -54,16 +48,7 @@ import { getAriaRole } from './utils/roles';
   let selectors = targetList.map(function (tgt) {return tgt.selector;}).join(', ');
 
   function getInfo (element, target) {
-    let info = {
-      title:      'INTERACTIVE INFO',
-      element:    getElementInfo(element),
-      grpLabels:  getGroupingLabels(element),
-      accName:    getAccessibleName(element),
-      accDesc:    getAccessibleDesc(element),
-      role:       getAriaRole(element)
-    };
-
-    return info;
+    return new InfoObject(element, 'INTERACTIVE INFO');
   }
 
   function evalInfo (info, target) {

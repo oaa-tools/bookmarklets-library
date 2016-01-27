@@ -3,10 +3,8 @@
 */
 
 import Bookmarklet from './Bookmarklet';
+import InfoObject from './InfoObject';
 import { imagesCss } from './utils/dom';
-import { getAccessibleName, getAccessibleDesc } from './utils/getaccname';
-import { getElementInfo } from './utils/info';
-import { getAriaRole } from './utils/roles';
 
 (function () {
   let targetList = [
@@ -18,15 +16,7 @@ import { getAriaRole } from './utils/roles';
   let selectors = targetList.map(function (tgt) {return tgt.selector;}).join(', ');
 
   function getInfo (element, target) {
-    let info = {
-      title:    'IMAGE INFO',
-      element:  getElementInfo(element),
-      accName:  getAccessibleName(element),
-      accDesc:  getAccessibleDesc(element),
-      role:     getAriaRole(element)
-    };
-
-    return info;
+    return new InfoObject(element, 'IMAGE INFO');
   }
 
   let params = {

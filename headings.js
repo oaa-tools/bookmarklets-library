@@ -3,10 +3,8 @@
 */
 
 import Bookmarklet from './Bookmarklet';
+import InfoObject from './InfoObject';
 import { headingsCss } from './utils/dom';
-import { getAccessibleName, getAccessibleDesc } from './utils/getaccname';
-import { getElementInfo } from './utils/info';
-import { getAriaRole } from './utils/roles';
 
 (function () {
   let targetList = [
@@ -21,15 +19,8 @@ import { getAriaRole } from './utils/roles';
   let selectors = targetList.map(function (tgt) {return tgt.selector;}).join(', ');
 
   function getInfo (element, target) {
-    let info = {
-      title:    'HEADING INFO',
-      element:  getElementInfo(element),
-      accName:  getAccessibleName(element),
-      accDesc:  getAccessibleDesc(element),
-      role:     getAriaRole(element),
-      props:    'level ' + target.label.substring(1)
-    };
-
+    let info = new InfoObject(element, 'HEADING INFO');
+    info.addProps('level ' + target.label.substring(1));
     return info;
   }
 

@@ -3,10 +3,8 @@
 */
 
 import Bookmarklet from './Bookmarklet';
+import InfoObject from './InfoObject';
 import { isDescendantOf, landmarksCss } from './utils/dom';
-import { getAccessibleName, getAccessibleDesc } from './utils/getaccname';
-import { getElementInfo } from './utils/info';
-import { getAriaRole } from './utils/roles';
 
 (function () {
 
@@ -43,15 +41,7 @@ import { getAriaRole } from './utils/roles';
   let selectors = targetList.map(function (tgt) {return '<li>' + tgt.selector + '</li>';}).join('');
 
   function getInfo (element, target) {
-    let info = {
-      title:    'LANDMARK INFO',
-      element:  getElementInfo(element),
-      accName:  getAccessibleName(element),
-      accDesc:  getAccessibleDesc(element),
-      role:     getAriaRole(element)
-    };
-
-    return info;
+    return new InfoObject(element, 'LANDMARK INFO');
   }
 
   let params = {

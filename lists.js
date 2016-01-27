@@ -3,10 +3,8 @@
 */
 
 import Bookmarklet from './Bookmarklet';
+import InfoObject from './InfoObject';
 import { countChildrenWithTagNames, listsCss } from './utils/dom';
-import { getAccessibleName, getAccessibleDesc } from './utils/getaccname';
-import { getElementInfo } from './utils/info';
-import { getAriaRole } from './utils/roles';
 
 (function () {
   let targetList = [
@@ -30,15 +28,8 @@ import { getAriaRole } from './utils/roles';
         break;
     }
 
-    let info = {
-      title:    'LIST INFO',
-      element:  getElementInfo(element),
-      accName:  getAccessibleName(element),
-      accDesc:  getAccessibleDesc(element),
-      role:     getAriaRole(element),
-      props:    listCount + ' items'
-    };
-
+    let info = new InfoObject(element, 'LIST INFO');
+    info.addProps(listCount + ' items');
     return info;
   }
 
