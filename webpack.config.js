@@ -1,3 +1,4 @@
+var webpack = require("webpack");
 var path = require("path");
 
 module.exports = {
@@ -18,8 +19,28 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loader: "eslint-loader" }
     ],
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: "babel" }
+      { test: /\.js$/, exclude: /node_modules/, loader: "babel" },
+      { test: /\.css$/, loader: "style!css" },
+      { test: /\.(jpe?g|png|gif)$/i, loader: "file" }
     ]
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      "$": "jquery",
+      "jQuery": "jquery",
+      "window.jQuery": "jquery"
+    })
+  ],
+  resolve: {
+    alias: {
+      // jquery-ui dependencies
+      "core": "jquery-ui/core.js",
+      "widget": "jquery-ui/widget.js",
+      "position": "jquery-ui/position.js",
+      "tooltip": "jquery-ui/tooltip.js",
+      // bind to modules;
+      modules: path.join(__dirname, "node_modules")
+    }
   },
   eslint: {
     quiet: true
