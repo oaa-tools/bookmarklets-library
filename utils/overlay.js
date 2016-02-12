@@ -10,23 +10,23 @@ let zIndex = 100000;
 *   boundingRect properties of its corresponding target element.
 */
 export function createOverlay (tgt, rect, cname) {
-  var node = document.createElement("div");
-  var label = document.createElement("div");
-  var scrollOffsets = getScrollOffsets();
-  var minWidth  = 34;
-  var minHeight = 27;
+  let scrollOffsets = getScrollOffsets();
+  const MINWIDTH  = 68;
+  const MINHEIGHT = 27;
 
+  let node = document.createElement("div");
   node.setAttribute("class", [cname, 'oaa-element-overlay'].join(' '));
   node.startLeft = (rect.left + scrollOffsets.x) + "px";
   node.startTop  = (rect.top  + scrollOffsets.y) + "px";
 
   node.style.left = node.startLeft;
   node.style.top  = node.startTop;
-  node.style.width  = Math.max(rect.width, minWidth) + "px";
-  node.style.height = Math.max(rect.height, minHeight) + "px";
+  node.style.width  = Math.max(rect.width, MINWIDTH) + "px";
+  node.style.height = Math.max(rect.height, MINHEIGHT) + "px";
   node.style.borderColor = tgt.color;
   node.style.zIndex = zIndex;
 
+  let label = document.createElement("div");
   label.setAttribute("class", 'oaa-overlay-label');
   label.style.backgroundColor = tgt.color;
   label.innerHTML = tgt.label;
