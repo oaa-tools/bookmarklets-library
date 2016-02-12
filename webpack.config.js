@@ -24,21 +24,12 @@ module.exports = {
       { test: /\.(jpe?g|png|gif)$/i, loader: "file" }
     ]
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      "$": "jquery",
-      "jQuery": "jquery",
-      "window.jQuery": "jquery"
-    })
-  ],
   resolve: {
     alias: {
-      // jquery-ui dependencies
-      "core": "jquery-ui/core.js",
-      "widget": "jquery-ui/widget.js",
-      "position": "jquery-ui/position.js",
-      "tooltip": "jquery-ui/tooltip.js",
-      // bind to modules;
+      core: "jquery-ui/core.js",
+      widget: "jquery-ui/widget.js",
+      position: "jquery-ui/position.js",
+      tooltip: "jquery-ui/tooltip.js",
       modules: path.join(__dirname, "node_modules")
     }
   },
