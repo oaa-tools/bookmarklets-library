@@ -1,5 +1,6 @@
 import { addNodes, removeNodes } from './utils/dom';
 import * as dialog from './utils/dialog';
+import { initJQueryUITooltips } from './utils/init';
 
 export default class {
   constructor (globalName, params) {
@@ -12,6 +13,8 @@ export default class {
     this.msgText  = params.msgText;
     this.params   = params;
     this.show     = false;
+
+    initJQueryUITooltips();
 
     window.addEventListener('resize', event => {
       removeNodes(this.cssClass);
