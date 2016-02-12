@@ -11,8 +11,8 @@ let zIndex = 100000;
 */
 export function createOverlay (tgt, rect, cname) {
   var node = document.createElement("div");
+  var label = document.createElement("div");
   var scrollOffsets = getScrollOffsets();
-  var innerStyle = "background-color: " + tgt.color;
   var minWidth  = 34;
   var minHeight = 27;
 
@@ -27,7 +27,11 @@ export function createOverlay (tgt, rect, cname) {
   node.style.borderColor = tgt.color;
   node.style.zIndex = zIndex;
 
-  node.innerHTML = '<div style="' + innerStyle + '">' + tgt.label + '</div>';
+  label.setAttribute("class", 'oaa-overlay-label');
+  label.style.backgroundColor = tgt.color;
+  label.innerHTML = tgt.label;
+
+  node.appendChild(label);
   return node;
 }
 
