@@ -42,7 +42,7 @@ export function formatInfo (info) {
   let value = '';
   let { title, element, grpLabels, accName, accDesc, role, props } = info;
 
-  value += title;
+  value += '=== ' + title + ' ===';
 
   if (element) value += '\nELEMENT: ' + element;
 
