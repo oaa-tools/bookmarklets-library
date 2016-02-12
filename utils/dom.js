@@ -104,7 +104,8 @@ export function addNodes (params) {
         let boundingRect = element.getBoundingClientRect();
         let overlayNode = createOverlay(target, boundingRect, cssClass);
         if (dndFlag) addDragAndDrop(overlayNode);
-        overlayNode.title = formatInfo(info);
+        let labelNode = overlayNode.firstChild;
+        labelNode.title = formatInfo(info);
         document.body.appendChild(overlayNode);
         counter += 1;
       }
