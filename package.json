@@ -26,8 +26,9 @@
   },
   "scripts": {
     "copy:css": "cp ./styles.css build/",
-    "build": "webpack -p && npm run copy:css",
-    "debug": "webpack && npm run copy:css",
+    "copy:js": "cp ./hrefutil.js build/",
+    "build": "webpack -p && npm run copy:css && npm run copy:js",
+    "debug": "webpack && npm run copy:css && npm run copy:js",
     "lint": "eslint *.js utils/*.js"
   }
 }
