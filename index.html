@@ -34,12 +34,15 @@
       </ul>
     </div>
     <script>
-      document.getElementById('Landmarks').href   = createBookmarkletHref('Landmarks');
-      document.getElementById('Headings').href    = createBookmarkletHref('Headings');
-      document.getElementById('Lists').href       = createBookmarkletHref('Lists');
-      document.getElementById('Images').href      = createBookmarkletHref('Images');
-      document.getElementById('Forms').href       = createBookmarkletHref('Forms');
-      document.getElementById('Interactive').href = createBookmarkletHref('Interactive');
+      (function () {
+        var url = "http://localhost/bookmarklets/"
+        document.getElementById('Landmarks').href   = createBookmarkletHref('Landmarks', url);
+        document.getElementById('Headings').href    = createBookmarkletHref('Headings', url);
+        document.getElementById('Lists').href       = createBookmarkletHref('Lists', url);
+        document.getElementById('Images').href      = createBookmarkletHref('Images', url);
+        document.getElementById('Forms').href       = createBookmarkletHref('Forms', url);
+        document.getElementById('Interactive').href = createBookmarkletHref('Interactive', url);
+      })();
     </script>
   </body>
 </html>
