@@ -1,12 +1,20 @@
+var overlay = require('./overlay'),
+    createOverlay = overlay.createOverlay,
+    addDragAndDrop = overlay.addDragAndDrop;
+
+var formatInfo = require('./info').formatInfo;
+
+module.exports = {
+  countChildrenWithTagNames: countChildrenWithTagNames,
+  isDescendantOf: isDescendantOf,
+  hasParentWithName: hasParentWithName,
+  addNodes: addNodes,
+  removeNodes: removeNodes
+};
+
 /*
 *   dom.js: functions and constants for adding and removing DOM overlay elements
 */
-
-import { createOverlay, addDragAndDrop } from './overlay';
-import { formatInfo } from './info';
-
-/* eslint no-console: 0 */
-let consoleOutput = false;
 
 /*
 *   isVisible: Recursively check element properties from getComputedStyle
@@ -40,7 +48,7 @@ function isVisible (element) {
 *   number of its child elements with tagName equal to one of the values
 *   in the tagNames array.
 */
-export function countChildrenWithTagNames (element, tagNames) {
+function countChildrenWithTagNames (element, tagNames) {
   let count = 0;
 
   let child = element.firstElementChild;
@@ -56,7 +64,7 @@ export function countChildrenWithTagNames (element, tagNames) {
 *   isDescendantOf: Determine whether element is a descendant of any
 *   element in the DOM with a tagName in the list of tagNames.
 */
-export function isDescendantOf (element, tagNames) {
+function isDescendantOf (element, tagNames) {
   if (typeof element.closest === 'function') {
     return tagNames.some(name => element.closest(name) !== null);
   }
@@ -67,7 +75,7 @@ export function isDescendantOf (element, tagNames) {
 *   hasParentWithName: Determine whether element has a parent with
 *   tagName in the list of tagNames.
 */
-export function hasParentWithName (element, tagNames) {
+function hasParentWithName (element, tagNames) {
   let parentTagName = element.parentElement.tagName.toLowerCase();
   if (parentTagName) {
     return tagNames.some(name => parentTagName === name);
@@ -81,15 +89,17 @@ export function hasParentWithName (element, tagNames) {
 *   Optionally, if getInfo is specified, add tooltip information;
 *   if dndFlag is set, add drag-and-drop functionality.
 */
-export function addNodes (params) {
-  let { targetList, cssClass, getInfo, evalInfo, dndFlag } = params;
+function addNodes (params) {
+  let targetList = params.targetList,
+      cssClass = params.cssClass,
+      getInfo = params.getInfo,
+      evalInfo = params.evalInfo,
+      dndFlag = params.dndFlag;
   let counter = 0;
 
   targetList.forEach(function (target) {
     // Collect elements based on selector defined for target
     let elements = document.querySelectorAll(target.selector);
-    if (consoleOutput && elements.length)
-      console.log(target.label + ": " + elements.length);
 
     // Filter elements if target defines a filter function
     if (typeof target.filter === 'function')
@@ -98,8 +108,6 @@ export function addNodes (params) {
     Array.prototype.forEach.call(elements, function (element) {
       if (isVisible(element)) {
         let info = getInfo(element, target);
-        if (consoleOutput && info.accName)
-          console.log("accName: " + info.accName.name);
         if (evalInfo) evalInfo(info, target);
         let boundingRect = element.getBoundingClientRect();
         let overlayNode = createOverlay(target, boundingRect, cssClass);
@@ -119,20 +127,10 @@ export function addNodes (params) {
 *   removeNodes: Use the unique CSS class name supplied to addNodes
 *   to remove all instances of the overlay nodes.
 */
-export function removeNodes (cssClass) {
+function removeNodes (cssClass) {
   let selector = "div." + cssClass;
   let elements = document.querySelectorAll(selector);
   Array.prototype.forEach.call(elements, function (element) {
     document.body.removeChild(element);
   });
 }
-
-/*
-*   Unique CSS class names
-*/
-export const formsCss       = "a11yGfdXALm0";
-export const headingsCss    = "a11yGfdXALm1";
-export const imagesCss      = "a11yGfdXALm2";
-export const landmarksCss   = "a11yGfdXALm3";
-export const listsCss       = "a11yGfdXALm4";
-export const interactiveCss = "a11yGfdXALm5";

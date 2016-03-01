@@ -1,15 +1,23 @@
+var utils = require('./utils'),
+    getScrollOffsets = utils.getScrollOffsets,
+    drag = utils.drag;
+
+module.exports = {
+  createOverlay: createOverlay,
+  addDragAndDrop: addDragAndDrop
+};
+
 /*
 *   overlay.js: functions for creating and modifying DOM overlay elements
 */
 
-import { getScrollOffsets, drag } from './utils';
 let zIndex = 100000;
 
 /*
 *   createOverlay: Create overlay div with size and position based on the
 *   boundingRect properties of its corresponding target element.
 */
-export function createOverlay (tgt, rect, cname) {
+function createOverlay (tgt, rect, cname) {
   let scrollOffsets = getScrollOffsets();
   const MINWIDTH  = 68;
   const MINHEIGHT = 27;
@@ -39,7 +47,7 @@ export function createOverlay (tgt, rect, cname) {
 *   addDragAndDrop: Add drag-and-drop and reposition functionality to an
 *   overlay div element created by the createOverlay function.
 */
-export function addDragAndDrop (node) {
+function addDragAndDrop (node) {
 
   function hoistZIndex (el) {
     let incr = 100;

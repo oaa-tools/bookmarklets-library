@@ -1,3 +1,8 @@
+module.exports = {
+  getScrollOffsets: getScrollOffsets,
+  drag: drag
+};
+
 /*
 *   utils.js: utility functions
 */
@@ -7,15 +12,15 @@
 *   coordinates that take into account whether the page has been scrolled.
 *   From Mozilla Developer Network: Element.getBoundingClientRect()
 */
-export function getScrollOffsets () {
-  var t;
+function getScrollOffsets () {
+  let t;
 
-  var xOffset = (typeof window.pageXOffset === "undefined") ?
+  let xOffset = (typeof window.pageXOffset === "undefined") ?
     (((t = document.documentElement) || (t = document.body.parentNode)) &&
       typeof t.ScrollLeft === 'number' ? t : document.body).ScrollLeft :
     window.pageXOffset;
 
-  var yOffset = (typeof window.pageYOffset === "undefined") ?
+  let yOffset = (typeof window.pageYOffset === "undefined") ?
     (((t = document.documentElement) || (t = document.body.parentNode)) &&
       typeof t.ScrollTop === 'number' ? t : document.body).ScrollTop :
     window.pageYOffset;
@@ -28,16 +33,16 @@ export function getScrollOffsets () {
 *   as its mousedown handler. Depends upon getScrollOffsets function.
 *   From JavaScript: The Definitive Guide, 6th Edition (slightly modified)
 */
-export function drag (elementToDrag, dragCallback, event) {
-  var scroll = getScrollOffsets();
-  var startX = event.clientX + scroll.x;
-  var startY = event.clientY + scroll.y;
+function drag (elementToDrag, dragCallback, event) {
+  let scroll = getScrollOffsets();
+  let startX = event.clientX + scroll.x;
+  let startY = event.clientY + scroll.y;
 
-  var origX = elementToDrag.offsetLeft;
-  var origY = elementToDrag.offsetTop;
+  let origX = elementToDrag.offsetLeft;
+  let origY = elementToDrag.offsetTop;
 
-  var deltaX = startX - origX;
-  var deltaY = startY - origY;
+  let deltaX = startX - origX;
+  let deltaY = startY - origY;
 
   if (dragCallback) dragCallback(elementToDrag);
 
@@ -61,7 +66,7 @@ export function drag (elementToDrag, dragCallback, event) {
   function moveHandler (e) {
     if (!e) e = window.event;
 
-    var scroll = getScrollOffsets();
+    let scroll = getScrollOffsets();
     elementToDrag.style.left = (e.clientX + scroll.x - deltaX) + "px";
     elementToDrag.style.top = (e.clientY + scroll.y - deltaY) + "px";
 

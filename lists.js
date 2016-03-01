@@ -1,12 +1,25 @@
+var Bookmarklet = require('./Bookmarklet');
+var InfoObject = require('./InfoObject');
+var constants = require('./utils/constants'),
+    getAppName = constants.getAppName,
+    getUniqueCssClass = constants.getUniqueCssClass;
+var countChildrenWithTagNames = require('./utils/dom').countChildrenWithTagNames;
+
 /*
-*   lists.js: bookmarklet script for highlighting list elements
+*   bookmarklet wrapper
+*/
+(function () {
+  initLists().run()
+})();
+
+/*
+*   lists.js: highlight list elements
 */
 
-import Bookmarklet from './Bookmarklet';
-import InfoObject from './InfoObject';
-import { countChildrenWithTagNames, listsCss } from './utils/dom';
+function initLists () {
+  const appName  = getAppName('Lists');
+  const cssClass = getUniqueCssClass('Lists');
 
-(function () {
   let targetList = [
     {selector: "dl", color: "olive",  label: "dl"},
     {selector: "ol", color: "purple", label: "ol"},
@@ -37,11 +50,10 @@ import { countChildrenWithTagNames, listsCss } from './utils/dom';
     msgTitle:   "Lists",
     msgText:    "No list elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   listsCss,
+    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  let blt = new Bookmarklet("a11yLists", params);
-  blt.run();
-})();
+  return new Bookmarklet(appName, params);
+}

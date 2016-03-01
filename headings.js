@@ -1,12 +1,24 @@
+var Bookmarklet = require('./Bookmarklet');
+var InfoObject = require('./InfoObject');
+var constants = require('./utils/constants'),
+    getAppName = constants.getAppName,
+    getUniqueCssClass = constants.getUniqueCssClass;
+
 /*
-*   headings.js: bookmarklet script for highlighting heading elements
+*   bookmarklet wrapper
+*/
+(function () {
+  initHeadings().run()
+})();
+
+/*
+*   headings.js: highlight heading elements
 */
 
-import Bookmarklet from './Bookmarklet';
-import InfoObject from './InfoObject';
-import { headingsCss } from './utils/dom';
+function initHeadings () {
+  const appName  = getAppName('Headings')
+  const cssClass = getUniqueCssClass('Headings');
 
-(function () {
   let targetList = [
     {selector: "h1", color: "navy",   label: "h1"},
     {selector: "h2", color: "olive",  label: "h2"},
@@ -28,11 +40,10 @@ import { headingsCss } from './utils/dom';
     msgTitle:   "Headings",
     msgText:    "No heading elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   headingsCss,
+    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  let blt = new Bookmarklet("a11yHeadings", params);
-  blt.run();
-})();
+  return new Bookmarklet(appName, params);
+}

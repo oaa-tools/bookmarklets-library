@@ -1,3 +1,9 @@
+module.exports = {
+  getValidRole: getValidRole,
+  getAriaRole: getAriaRole,
+  nameFromIncludesContents: nameFromIncludesContents
+};
+
 /*
 *   roles.js
 *
@@ -6,9 +12,6 @@
 *   2. WAI-ARIA 1.1 (http://www.w3.org/TR/wai-aria-1.1/)
 *   3. WAI-ARIA 1.0 (http://www.w3.org/TR/wai-aria/)
 */
-
-import { isDescendantOf, hasParentWithName } from './dom';
-import { getAttributeValue, hasEmptyAltText } from './namefrom';
 
 /*
 *   inListOfOptions: Determine whether element is a child of
@@ -37,7 +40,7 @@ function inListOfOptions (element) {
 *   validRoles: Reference list of all concrete ARIA roles as specified in
 *   WAI-ARIA 1.1 Working Draft of 14 July 2015
 */
-const validRoles = [
+var validRoles = [
 
   // LANDMARK
   'application',
@@ -120,7 +123,7 @@ const validRoles = [
 *   to find its match in the validRoles array. If a match is found, return
 *   it. Otherwise, return null.
 */
-export function getValidRole (spaceSepList) {
+function getValidRole (spaceSepList) {
   let arr = spaceSepList.split(' ');
 
   for (let i = 0; i < arr.length; i++) {
@@ -137,9 +140,15 @@ export function getValidRole (spaceSepList) {
 *   not specified, get the default role of element if it has one. Based on
 *   ARIA in HTML as of 21 October 2015.
 */
-export function getAriaRole (element) {
+function getAriaRole (element) {
   let tagName = element.tagName.toLowerCase(),
       type    = element.type;
+
+  let getAttributeValue = require('./namefrom').getAttributeValue,
+      hasEmptyAltText = require('./namefrom').hasEmptyAltText;
+
+  let isDescendantOf = require('./dom').isDescendantOf,
+      hasParentWithName = require('./dom').hasParentWithName;
 
   if (element.hasAttribute('role')) {
     return getValidRole(getAttributeValue(element, 'role'));
@@ -267,7 +276,7 @@ export function getAriaRole (element) {
 *   nameFromIncludesContents: Determine whether the ARIA role of element
 *   specifies that its 'name from' includes 'contents'.
 */
-export function nameFromIncludesContents (element) {
+function nameFromIncludesContents (element) {
   let elementRole = getAriaRole(element);
   if (elementRole === null) return false;
 

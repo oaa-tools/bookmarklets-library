@@ -1,8 +1,25 @@
+var embedded = require('./embedded'),
+    isEmbeddedControl = embedded.isEmbeddedControl,
+    getEmbeddedControlValue = embedded.getEmbeddedControlValue;
+
+module.exports = {
+  normalize: normalize,
+  getAttributeValue: getAttributeValue,
+  hasEmptyAltText: hasEmptyAltText,
+  isLabelableElement: isLabelableElement,
+  getElementContents: getElementContents,
+  nameFromAttribute: nameFromAttribute,
+  nameFromAltAttribute: nameFromAltAttribute,
+  nameFromContents: nameFromContents,
+  nameFromDefault: nameFromDefault,
+  nameFromDescendant: nameFromDescendant,
+  nameFromLabelElement: nameFromLabelElement,
+  nameFromDetailsOrSummary: nameFromDetailsOrSummary
+};
+
 /*
 *   namefrom.js
 */
-
-import { isEmbeddedControl, getEmbeddedControlValue } from './embedded';
 
 // LOW-LEVEL FUNCTIONS
 
@@ -12,7 +29,7 @@ import { isEmbeddedControl, getEmbeddedControlValue } from './embedded';
 *   Mozilla documentation on String.prototype.trim polyfill. Handles
 *   BOM and NBSP characters.
 */
-export function normalize (s) {
+function normalize (s) {
   let rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
   return s.replace(rtrim, '').replace(/\s+/g, ' ');
 }
@@ -21,7 +38,7 @@ export function normalize (s) {
 *   getAttributeValue: Return attribute value if present on element,
 *   otherwise return empty string.
 */
-export function getAttributeValue (element, attribute) {
+function getAttributeValue (element, attribute) {
   let value = element.getAttribute(attribute);
   return (value === null) ? '' : normalize(value);
 }
@@ -48,7 +65,7 @@ function couldHaveAltText (element) {
 *   hasEmptyAltText: Determine whether the alt attribute is present
 *   and its value is the empty string.
 */
-export function hasEmptyAltText (element) {
+function hasEmptyAltText (element) {
   let value = element.getAttribute('alt');
 
    // Attribute is present
@@ -62,7 +79,7 @@ export function hasEmptyAltText (element) {
 *   isLabelableElement: Based on HTML5 specification, determine whether
 *   element can be associated with a label.
 */
-export function isLabelableElement (element) {
+function isLabelableElement (element) {
   let tagName = element.tagName.toLowerCase(),
       type    = element.type;
 
@@ -152,7 +169,7 @@ function getNodeContents (node, forElem) {
 *   processing its element and text node descendants and then adding any CSS-
 *   generated content if present.
 */
-export function getElementContents (element, forElement) {
+function getElementContents (element, forElement) {
   let result = '';
 
   if (element.hasChildNodes()) {
@@ -201,7 +218,7 @@ function getContentsOfChildNodes (element, predicate) {
 /*
 *   nameFromAttribute
 */
-export function nameFromAttribute (element, attribute) {
+function nameFromAttribute (element, attribute) {
   let name;
 
   name = getAttributeValue(element, attribute);
@@ -213,7 +230,7 @@ export function nameFromAttribute (element, attribute) {
 /*
 *   nameFromAltAttribute
 */
-export function nameFromAltAttribute (element) {
+function nameFromAltAttribute (element) {
   let name = element.getAttribute('alt');
 
   // Attribute is present
@@ -231,7 +248,7 @@ export function nameFromAltAttribute (element) {
 /*
 *   nameFromContents
 */
-export function nameFromContents (element) {
+function nameFromContents (element) {
   let name;
 
   name = getElementContents(element);
@@ -243,14 +260,14 @@ export function nameFromContents (element) {
 /*
 *   nameFromDefault
 */
-export function nameFromDefault (name) {
+function nameFromDefault (name) {
   return name.length ? { name: name, source: 'default' } : null;
 }
 
 /*
 *   nameFromDescendant
 */
-export function nameFromDescendant (element, tagName) {
+function nameFromDescendant (element, tagName) {
   let descendant = element.querySelector(tagName);
   if (descendant) {
     let name = getElementContents(descendant);
@@ -263,7 +280,7 @@ export function nameFromDescendant (element, tagName) {
 /*
 *   nameFromLabelElement
 */
-export function nameFromLabelElement (element) {
+function nameFromLabelElement (element) {
   let name, label;
 
   // label [for=id]
@@ -293,7 +310,7 @@ export function nameFromLabelElement (element) {
 *   of element and all of its non-summary child elements. Otherwise, return
 *   only the contents of the first summary element descendant.
 */
-export function nameFromDetailsOrSummary (element) {
+function nameFromDetailsOrSummary (element) {
   let name, summary;
 
   function isExpanded (elem) { return elem.hasAttribute('open'); }

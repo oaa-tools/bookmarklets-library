@@ -1,14 +1,21 @@
+var namefrom = require('./namefrom'),
+    getAttributeValue = namefrom.getAttributeValue,
+    isLabelableElement = namefrom.isLabelableElement;
+
+module.exports = {
+  getElementInfo: getElementInfo,
+  formatInfo: formatInfo
+};
+
 /*
 *   info.js: Function for displaying information on highlighted elements
 */
-
-import { getAttributeValue, isLabelableElement } from './namefrom';
 
 /*
 *   getElementInfo: Extract tagName and other attribute information
 *   based on tagName and return as formatted string.
 */
-export function getElementInfo (element) {
+function getElementInfo (element) {
   let tagName = element.tagName.toLowerCase(),
       elementInfo = tagName;
 
@@ -38,9 +45,15 @@ export function getElementInfo (element) {
 /*
 *   formatInfo: Convert info properties into a string with line breaks.
 */
-export function formatInfo (info) {
+function formatInfo (info) {
   let value = '';
-  let { title, element, grpLabels, accName, accDesc, role, props } = info;
+  let title = info.title,
+      element = info.element,
+      grpLabels = info.grpLabels,
+      accName = info.accName,
+      accDesc = info.accDesc,
+      role = info.role,
+      props = info.props;
 
   value += '=== ' + title + ' ===';
 

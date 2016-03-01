@@ -1,12 +1,24 @@
+var Bookmarklet = require('./Bookmarklet');
+var InfoObject = require('./InfoObject');
+var constants = require('./utils/constants'),
+    getAppName = constants.getAppName,
+    getUniqueCssClass = constants.getUniqueCssClass;
+
 /*
-*   images.js: bookmarklet script for highlighting image elements
+*   bookmarklet wrapper
+*/
+(function () {
+  initImages().run()
+})();
+
+/*
+*   images.js: highlight image elements
 */
 
-import Bookmarklet from './Bookmarklet';
-import InfoObject from './InfoObject';
-import { imagesCss } from './utils/dom';
+function initImages () {
+  const appName  = getAppName('Images')
+  const cssClass = getUniqueCssClass('Images');
 
-(function () {
   let targetList = [
     {selector: "area", color: "teal",   label: "area"},
     {selector: "img",  color: "olive",  label: "img"},
@@ -23,11 +35,10 @@ import { imagesCss } from './utils/dom';
     msgTitle:   "Images",
     msgText:    "No image elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   imagesCss,
+    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  let blt = new Bookmarklet("a11yImages", params);
-  blt.run();
-})();
+  return new Bookmarklet(appName, params);
+}

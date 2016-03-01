@@ -1,9 +1,17 @@
+var getAriaRole = require('./roles').getAriaRole;
+
+var namefrom = require('./namefrom'),
+    getAttributeValue = namefrom.getAttributeValue,
+    normalize = namefrom.normalize;
+
+module.exports = {
+  isEmbeddedControl: isEmbeddedControl,
+  getEmbeddedControlValue: getEmbeddedControlValue
+};
+
 /*
 *   embedded.js
 */
-
-import { getAriaRole } from './roles';
-import { getAttributeValue, normalize } from './namefrom';
 
 // LOW-LEVEL FUNCTIONS
 
@@ -104,7 +112,7 @@ function getListboxValue (element) {
 *   isEmbeddedControl: Determine whether element has a role that corresponds
 *   to an HTML form control that could be embedded within text content.
 */
-export function isEmbeddedControl (element) {
+function isEmbeddedControl (element) {
   let embeddedControlRoles = [
     'textbox',
     'combobox',
@@ -121,7 +129,7 @@ export function isEmbeddedControl (element) {
 *   getEmbeddedControlValue: Based on the role of element, use native semantics
 *   of HTML to get the corresponding text value of the embedded control.
 */
-export function getEmbeddedControlValue (element) {
+function getEmbeddedControlValue (element) {
   let role = getAriaRole(element);
 
   switch (role) {

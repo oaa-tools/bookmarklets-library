@@ -1,12 +1,24 @@
+var Bookmarklet = require('./Bookmarklet');
+var InfoObject = require('./InfoObject');
+var constants = require('./utils/constants'),
+    getAppName = constants.getAppName,
+    getUniqueCssClass = constants.getUniqueCssClass;
+var isDescendantOf = require('./utils/dom').isDescendantOf;
+
 /*
-*   landmarks.js: bookmarklet script for highlighting ARIA landmarks
+*   bookmarklet wrapper
+*/
+(function () {
+  initLandmarks().run()
+})();
+
+/*
+*   landmarks.js: highlight ARIA landmarks
 */
 
-import Bookmarklet from './Bookmarklet';
-import InfoObject from './InfoObject';
-import { isDescendantOf, landmarksCss } from './utils/dom';
-
-(function () {
+function initLandmarks () {
+  const appName  = getAppName('Landmarks');
+  const cssClass = getUniqueCssClass('Landmarks');
 
   // Filter function called on a list of elements returned by selector
   // 'footer, [role="contentinfo"]'. It returns true for the following
@@ -48,11 +60,10 @@ import { isDescendantOf, landmarksCss } from './utils/dom';
     msgTitle:   "Landmarks",
     msgText:    "No elements with ARIA Landmark roles found: <ul>" + selectors + "</ul>",
     targetList: targetList,
-    cssClass:   landmarksCss,
+    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  let blt = new Bookmarklet("a11yLandmarks", params);
-  blt.run();
-})();
+  return new Bookmarklet(appName, params);
+}

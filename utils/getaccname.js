@@ -1,3 +1,26 @@
+var namefrom = require('./namefrom'),
+    getAttributeValue = namefrom.getAttributeValue,
+    getElementContents = namefrom.getElementContents,
+    isLabelableElement = namefrom.isLabelableElement,
+    nameFromAttribute = namefrom.nameFromAttribute,
+    nameFromAltAttribute = namefrom.nameFromAltAttribute,
+    nameFromContents = namefrom.nameFromContents,
+    nameFromDefault = namefrom.nameFromDefault,
+    nameFromDescendant = namefrom.nameFromDescendant,
+    nameFromLabelElement = namefrom.nameFromLabelElement,
+    nameFromDetailsOrSummary = namefrom.nameFromDetailsOrSummary;
+
+var roles = require('./roles'),
+    getAriaRole = roles.getAriaRole,
+    nameFromIncludesContents = roles.nameFromIncludesContents;
+
+module.exports = {
+  getGroupingLabels: getGroupingLabels,
+  nameFromNativeSemantics: nameFromNativeSemantics,
+  getAccessibleName: getAccessibleName,
+  getAccessibleDesc: getAccessibleDesc
+};
+
 /*
 *   getaccname.js
 *
@@ -5,21 +28,6 @@
 *   1. HTML Accessibility API Mappings 1.0 (http://rawgit.com/w3c/aria/master/html-aam/html-aam.html)
 *   2. SVG Accessibility API Mappings (http://rawgit.com/w3c/aria/master/svg-aam/svg-aam.html)
 */
-
-import {
-  getAttributeValue,
-  getElementContents,
-  isLabelableElement,
-  nameFromAttribute,
-  nameFromAltAttribute,
-  nameFromContents,
-  nameFromDefault,
-  nameFromDescendant,
-  nameFromLabelElement,
-  nameFromDetailsOrSummary
-} from './namefrom';
-
-import { getAriaRole, nameFromIncludesContents } from './roles';
 
 /*
 *   getFieldsetLegendLabels: Recursively collect legend contents of
@@ -57,7 +65,7 @@ function getFieldsetLegendLabels (element) {
 *   getGroupingLabels: Return an array of grouping label objects for
 *   element, each with two properties: 'name' and 'source'.
 */
-export function getGroupingLabels (element) {
+function getGroupingLabels (element) {
   // We currently only handle labelable elements as defined in HTML 5.1
   if (isLabelableElement(element)) {
     return getFieldsetLegendLabels(element);
@@ -74,7 +82,7 @@ export function getGroupingLabels (element) {
 *   indicating that we are in a recursive aria-labelledby calculation, the
 *   nameFromContents method is used.
 */
-export function nameFromNativeSemantics (element, recFlag = false) {
+function nameFromNativeSemantics (element, recFlag) {
   let tagName = element.tagName.toLowerCase(),
       ariaRole = getAriaRole(element),
       accName = null;
@@ -252,7 +260,7 @@ function nameFromAttributeIdRefs (element, attribute) {
 *   (3) Use whatever method is specified by the native semantics of the
 *   element, which includes, as last resort, use of the title attribute.
 */
-export function getAccessibleName (element, recFlag = false) {
+function getAccessibleName (element, recFlag) {
   let accName = null;
 
   if (!recFlag) accName = nameFromAttributeIdRefs(element, 'aria-labelledby');
@@ -268,7 +276,7 @@ export function getAccessibleName (element, recFlag = false) {
 *   (1) Use aria-describedby, unless a traversal is already underway;
 *   (2) As last resort, use the title attribute.
 */
-export function getAccessibleDesc (element, recFlag = false) {
+function getAccessibleDesc (element, recFlag) {
   let accDesc = null;
 
   if (!recFlag) accDesc = nameFromAttributeIdRefs(element, 'aria-describedby');

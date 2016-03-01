@@ -1,12 +1,24 @@
+var Bookmarklet = require('./Bookmarklet');
+var InfoObject = require('./InfoObject');
+var constants = require('./utils/constants'),
+    getAppName = constants.getAppName,
+    getUniqueCssClass = constants.getUniqueCssClass;
+
 /*
-*   forms.js: bookmarklet script for highlighting form-related elements
+*   bookmarklet wrapper
+*/
+(function () {
+  initForms().run()
+})();
+
+/*
+*   forms.js: highlight form-related elements
 */
 
-import Bookmarklet from './Bookmarklet';
-import InfoObject from './InfoObject';
-import { formsCss } from './utils/dom';
+function initForms () {
+  const appName  = getAppName('Forms');
+  const cssClass = getUniqueCssClass('Forms');
 
-(function () {
   let targetList = [
     {selector: "button",   color: "purple", label: "button"},
     {selector: "input",    color: "navy",   label: "input"},
@@ -28,11 +40,10 @@ import { formsCss } from './utils/dom';
     msgTitle:   "Forms",
     msgText:    "No form-related elements found: <ul>" + selectors + "</ul>",
     targetList: targetList,
-    cssClass:   formsCss,
+    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  let blt = new Bookmarklet("a11yForms", params);
-  blt.run();
-})();
+  return new Bookmarklet(appName, params);
+}

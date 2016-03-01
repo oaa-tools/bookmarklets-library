@@ -1,10 +1,19 @@
-/*
-*   interactive.js: bookmarklet script for highlighting all interactive elements
-*/
+var Bookmarklet = require('./Bookmarklet');
+var InfoObject = require('./InfoObject');
+var constants = require('./utils/constants'),
+    getAppName = constants.getAppName,
+    getUniqueCssClass = constants.getUniqueCssClass;
 
-import Bookmarklet from './Bookmarklet';
-import InfoObject from './InfoObject';
-import { interactiveCss } from './utils/dom';
+/*
+*   bookmarklet wrapper
+*/
+(function () {
+  initInteractive().run()
+})();
+
+/*
+*   interactive.js: highlight all interactive elements
+*/
 
 /*
 *   Interactive elements as defined by HTML5:
@@ -16,7 +25,10 @@ import { interactiveCss } from './utils/dom';
 *   object[usemap], select, textarea, video[controls]
 */
 
-(function () {
+function initInteractive () {
+  const appName  = getAppName('Interactive');
+  const cssClass = getUniqueCssClass('Interactive');
+
   let targetList = [
     // interactive elements defined in HTML5 spec
     {selector: "a",                    color: "olive",  label: "a"},
@@ -59,12 +71,11 @@ import { interactiveCss } from './utils/dom';
     msgTitle:   "Interactive",
     msgText:    "No interactive elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   interactiveCss,
+    cssClass:   cssClass,
     getInfo:    getInfo,
     evalInfo:   evalInfo,
     dndFlag:    true
   };
 
-  let blt = new Bookmarklet("a11yInteractive", params);
-  blt.run();
-})();
+  return new Bookmarklet(appName, params);
+}
