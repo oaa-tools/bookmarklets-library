@@ -1,9 +1,10 @@
+var getScrollOffsets = require('./utils').getScrollOffsets;
+
+module.exports.MessageDialog = MessageDialog;
+
 /*
 *   dialog.js: functions for creating, modifying and deleting message dialog
 */
-
-import { getScrollOffsets } from './utils';
-const MSG_DIALOG = 'a11yMessageDialog';
 
 /*
 *   setBoxGeometry: Set the width and position of message dialog based on
@@ -25,11 +26,11 @@ function setBoxGeometry (dialog) {
 *   purpose is to alert the user when no target elements are found by
 *   a bookmarklet.
 */
-function createMsgDialog (handler) {
+function createMsgDialog (cssClass, handler) {
   let dialog = document.createElement("div");
   let button  = document.createElement("button");
 
-  dialog.className = "oaa-message-dialog";
+  dialog.className = cssClass;
   setBoxGeometry(dialog);
 
   button.onclick = handler;
@@ -47,13 +48,22 @@ function deleteMsgDialog (dialog) {
 }
 
 /*
+*   MessageDialog: Wrapper for show, hide and resize methods
+*/
+function MessageDialog () {
+  this.GLOBAL_NAME = 'a11yMessageDialog';
+  this.CSS_CLASS = 'oaa-message-dialog';
+}
+
+/*
 *   show: show message dialog
 */
-export function show (title, message) {
-  var h2, div;
+MessageDialog.prototype.show = function (title, message) {
+  const MSG_DIALOG = this.GLOBAL_NAME;
+  let h2, div;
 
   if (!window[MSG_DIALOG])
-    window[MSG_DIALOG] = createMsgDialog(hide);
+    window[MSG_DIALOG] = createMsgDialog(this.CSS_CLASS, event => this.hide());
 
   h2 = document.createElement("h2");
   h2.innerHTML = title;
@@ -62,22 +72,24 @@ export function show (title, message) {
   div = document.createElement("div");
   div.innerHTML = message;
   window[MSG_DIALOG].appendChild(div);
-}
+};
 
 /*
 *   hide: hide message dialog
 */
-export function hide () {
+MessageDialog.prototype.hide = function () {
+  const MSG_DIALOG = this.GLOBAL_NAME;
   if (window[MSG_DIALOG]) {
     deleteMsgDialog(window[MSG_DIALOG]);
     delete(window[MSG_DIALOG]);
   }
-}
+};
 
 /*
 *   resize: resize message dialog
 */
-export function resize () {
+MessageDialog.prototype.resize = function () {
+  const MSG_DIALOG = this.GLOBAL_NAME;
   if (window[MSG_DIALOG])
     setBoxGeometry(window[MSG_DIALOG]);
-}
+};
