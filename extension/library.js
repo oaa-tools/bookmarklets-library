@@ -1329,7 +1329,7 @@ function nameFromDetailsOrSummary (element) {
 *   overlay.js: functions for creating and modifying DOM overlay elements
 */
 
-let zIndex = 100000;
+var zIndex = 100000;
 
 /*
 *   createOverlay: Create overlay div with size and position based on the
