@@ -1,11 +1,11 @@
+/*
+*   InfoObject.js
+*/
+
 import { getAccessibleName, getAccessibleDesc, getGroupingLabels } from './utils/getaccname';
 import { getElementInfo } from './utils/info';
 import { getAriaRole } from './utils/roles';
 export { InfoObject };
-
-/*
-*   InfoObject.js
-*/
 
 /*
 *  nameIncludesDescription: Determine whether accName object's name

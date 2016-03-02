@@ -1,10 +1,10 @@
-import { addNodes, removeNodes } from './utils/dom';
-import { MessageDialog } from './utils/dialog';
-export { Bookmarklet };
-
 /*
 *   Bookmarklet.js
 */
+
+import { addNodes, removeNodes } from './utils/dom';
+import { MessageDialog } from './utils/dialog';
+export { Bookmarklet };
 
 function Bookmarklet (globalName, params) {
   // use singleton pattern
