@@ -1,10 +1,6 @@
-var dom = require('./utils/dom'),
-    addNodes = dom.addNodes,
-    removeNodes = dom.removeNodes;
-
-var MessageDialog = require('./utils/dialog').MessageDialog;
-
-module.exports = Bookmarklet;
+import { addNodes, removeNodes } from './utils/dom';
+import { MessageDialog } from './utils/dialog';
+export { Bookmarklet };
 
 /*
 *   Bookmarklet.js

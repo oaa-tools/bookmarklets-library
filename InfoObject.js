@@ -1,12 +1,7 @@
-var getaccname = require('./utils/getaccname'),
-    getAccessibleName = getaccname.getAccessibleName,
-    getAccessibleDesc = getaccname.getAccessibleDesc,
-    getGroupingLabels = getaccname.getGroupingLabels;
-
-var getElementInfo = require('./utils/info').getElementInfo;
-var getAriaRole = require('./utils/roles').getAriaRole;
-
-module.exports = InfoObject;
+import { getAccessibleName, getAccessibleDesc, getGroupingLabels } from './utils/getaccname';
+import { getElementInfo } from './utils/info';
+import { getAriaRole } from './utils/roles';
+export { InfoObject };
 
 /*
 *   InfoObject.js

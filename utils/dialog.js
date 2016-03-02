@@ -1,10 +1,9 @@
-var getScrollOffsets = require('./utils').getScrollOffsets;
-
-module.exports.MessageDialog = MessageDialog;
-
 /*
 *   dialog.js: functions for creating, modifying and deleting message dialog
 */
+
+import { getScrollOffsets } from './utils';
+export { MessageDialog };
 
 /*
 *   setBoxGeometry: Set the width and position of message dialog based on

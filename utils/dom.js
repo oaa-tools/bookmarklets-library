@@ -1,20 +1,23 @@
-var overlay = require('./overlay'),
-    createOverlay = overlay.createOverlay,
-    addDragAndDrop = overlay.addDragAndDrop;
-
-var formatInfo = require('./info').formatInfo;
-
-module.exports = {
-  countChildrenWithTagNames: countChildrenWithTagNames,
-  isDescendantOf: isDescendantOf,
-  hasParentWithName: hasParentWithName,
-  addNodes: addNodes,
-  removeNodes: removeNodes
-};
-
 /*
 *   dom.js: functions and constants for adding and removing DOM overlay elements
 */
+
+import {
+  createOverlay,
+  addDragAndDrop
+} from './overlay';
+
+import {
+  formatInfo
+} from './info';
+
+export {
+  countChildrenWithTagNames,
+  isDescendantOf,
+  hasParentWithName,
+  addNodes,
+  removeNodes
+};
 
 /*
 *   isVisible: Recursively check element properties from getComputedStyle

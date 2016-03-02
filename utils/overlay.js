@@ -1,15 +1,9 @@
-var utils = require('./utils'),
-    getScrollOffsets = utils.getScrollOffsets,
-    drag = utils.drag;
-
-module.exports = {
-  createOverlay: createOverlay,
-  addDragAndDrop: addDragAndDrop
-};
-
 /*
 *   overlay.js: functions for creating and modifying DOM overlay elements
 */
+
+import { getScrollOffsets, drag } from './utils';
+export { createOverlay, addDragAndDrop };
 
 let zIndex = 100000;
 

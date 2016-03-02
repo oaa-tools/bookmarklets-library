@@ -1,17 +1,10 @@
-var getAriaRole = require('./roles').getAriaRole;
-
-var namefrom = require('./namefrom'),
-    getAttributeValue = namefrom.getAttributeValue,
-    normalize = namefrom.normalize;
-
-module.exports = {
-  isEmbeddedControl: isEmbeddedControl,
-  getEmbeddedControlValue: getEmbeddedControlValue
-};
-
 /*
 *   embedded.js
 */
+
+import { getAriaRole } from './roles';
+import { getAttributeValue, normalize } from './namefrom';
+export { isEmbeddedControl, getEmbeddedControlValue };
 
 // LOW-LEVEL FUNCTIONS
 

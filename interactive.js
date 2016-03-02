@@ -1,19 +1,14 @@
-var Bookmarklet = require('./Bookmarklet');
-var InfoObject = require('./InfoObject');
-var constants = require('./utils/constants'),
-    getAppName = constants.getAppName,
-    getUniqueCssClass = constants.getUniqueCssClass;
-
-/*
-*   bookmarklet wrapper
-*/
-(function () {
-  initInteractive().run()
-})();
-
 /*
 *   interactive.js: highlight all interactive elements
 */
+
+import { Bookmarklet } from './Bookmarklet';
+import { InfoObject } from './InfoObject';
+import { getAppName, getUniqueCssClass } from './utils/constants';
+
+(function () {
+  initInteractive().run()
+})();
 
 /*
 *   Interactive elements as defined by HTML5:

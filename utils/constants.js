@@ -2,10 +2,7 @@
 *   constants.js
 */
 
-module.exports = {
-  getAppName: getAppName,
-  getUniqueCssClass: getUniqueCssClass
-}
+export { getAppName, getUniqueCssClass };
 
 var CONSTANTS = {};
 Object.defineProperty(CONSTANTS, 'appPrefix',   { value: 'a11y' });

@@ -1,15 +1,9 @@
-var namefrom = require('./namefrom'),
-    getAttributeValue = namefrom.getAttributeValue,
-    isLabelableElement = namefrom.isLabelableElement;
-
-module.exports = {
-  getElementInfo: getElementInfo,
-  formatInfo: formatInfo
-};
-
 /*
 *   info.js: Function for displaying information on highlighted elements
 */
+
+import { getAttributeValue, isLabelableElement } from './namefrom';
+export { getElementInfo, formatInfo };
 
 /*
 *   getElementInfo: Extract tagName and other attribute information

@@ -1,9 +1,3 @@
-module.exports = {
-  getValidRole: getValidRole,
-  getAriaRole: getAriaRole,
-  nameFromIncludesContents: nameFromIncludesContents
-};
-
 /*
 *   roles.js
 *
@@ -12,6 +6,10 @@ module.exports = {
 *   2. WAI-ARIA 1.1 (http://www.w3.org/TR/wai-aria-1.1/)
 *   3. WAI-ARIA 1.0 (http://www.w3.org/TR/wai-aria/)
 */
+
+import { isDescendantOf, hasParentWithName } from './dom';
+import { getAttributeValue, hasEmptyAltText } from './namefrom';
+export { getValidRole, getAriaRole, nameFromIncludesContents };
 
 /*
 *   inListOfOptions: Determine whether element is a child of
@@ -143,12 +141,6 @@ function getValidRole (spaceSepList) {
 function getAriaRole (element) {
   let tagName = element.tagName.toLowerCase(),
       type    = element.type;
-
-  let getAttributeValue = require('./namefrom').getAttributeValue,
-      hasEmptyAltText = require('./namefrom').hasEmptyAltText;
-
-  let isDescendantOf = require('./dom').isDescendantOf,
-      hasParentWithName = require('./dom').hasParentWithName;
 
   if (element.hasAttribute('role')) {
     return getValidRole(getAttributeValue(element, 'role'));

@@ -1,25 +1,26 @@
-var embedded = require('./embedded'),
-    isEmbeddedControl = embedded.isEmbeddedControl,
-    getEmbeddedControlValue = embedded.getEmbeddedControlValue;
-
-module.exports = {
-  normalize: normalize,
-  getAttributeValue: getAttributeValue,
-  hasEmptyAltText: hasEmptyAltText,
-  isLabelableElement: isLabelableElement,
-  getElementContents: getElementContents,
-  nameFromAttribute: nameFromAttribute,
-  nameFromAltAttribute: nameFromAltAttribute,
-  nameFromContents: nameFromContents,
-  nameFromDefault: nameFromDefault,
-  nameFromDescendant: nameFromDescendant,
-  nameFromLabelElement: nameFromLabelElement,
-  nameFromDetailsOrSummary: nameFromDetailsOrSummary
-};
-
 /*
 *   namefrom.js
 */
+
+import {
+  isEmbeddedControl,
+  getEmbeddedControlValue
+} from './embedded';
+
+export {
+  normalize,
+  getAttributeValue,
+  hasEmptyAltText,
+  isLabelableElement,
+  getElementContents,
+  nameFromAttribute,
+  nameFromAltAttribute,
+  nameFromContents,
+  nameFromDefault,
+  nameFromDescendant,
+  nameFromLabelElement,
+  nameFromDetailsOrSummary
+};
 
 // LOW-LEVEL FUNCTIONS
 

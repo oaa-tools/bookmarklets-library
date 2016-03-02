@@ -1,11 +1,8 @@
-module.exports = {
-  getScrollOffsets: getScrollOffsets,
-  drag: drag
-};
-
 /*
 *   utils.js: utility functions
 */
+
+export { getScrollOffsets, drag };
 
 /*
 *   getScrollOffsets: Use x and y scroll offsets to calculate positioning

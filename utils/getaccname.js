@@ -1,26 +1,3 @@
-var namefrom = require('./namefrom'),
-    getAttributeValue = namefrom.getAttributeValue,
-    getElementContents = namefrom.getElementContents,
-    isLabelableElement = namefrom.isLabelableElement,
-    nameFromAttribute = namefrom.nameFromAttribute,
-    nameFromAltAttribute = namefrom.nameFromAltAttribute,
-    nameFromContents = namefrom.nameFromContents,
-    nameFromDefault = namefrom.nameFromDefault,
-    nameFromDescendant = namefrom.nameFromDescendant,
-    nameFromLabelElement = namefrom.nameFromLabelElement,
-    nameFromDetailsOrSummary = namefrom.nameFromDetailsOrSummary;
-
-var roles = require('./roles'),
-    getAriaRole = roles.getAriaRole,
-    nameFromIncludesContents = roles.nameFromIncludesContents;
-
-module.exports = {
-  getGroupingLabels: getGroupingLabels,
-  nameFromNativeSemantics: nameFromNativeSemantics,
-  getAccessibleName: getAccessibleName,
-  getAccessibleDesc: getAccessibleDesc
-};
-
 /*
 *   getaccname.js
 *
@@ -28,6 +5,31 @@ module.exports = {
 *   1. HTML Accessibility API Mappings 1.0 (http://rawgit.com/w3c/aria/master/html-aam/html-aam.html)
 *   2. SVG Accessibility API Mappings (http://rawgit.com/w3c/aria/master/svg-aam/svg-aam.html)
 */
+
+import {
+  getAttributeValue,
+  getElementContents,
+  isLabelableElement,
+  nameFromAttribute,
+  nameFromAltAttribute,
+  nameFromContents,
+  nameFromDefault,
+  nameFromDescendant,
+  nameFromLabelElement,
+  nameFromDetailsOrSummary
+} from './namefrom';
+
+import {
+  getAriaRole,
+  nameFromIncludesContents
+} from './roles';
+
+export {
+  getGroupingLabels,
+  nameFromNativeSemantics,
+  getAccessibleName,
+  getAccessibleDesc
+};
 
 /*
 *   getFieldsetLegendLabels: Recursively collect legend contents of

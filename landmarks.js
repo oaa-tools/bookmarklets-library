@@ -1,20 +1,15 @@
-var Bookmarklet = require('./Bookmarklet');
-var InfoObject = require('./InfoObject');
-var constants = require('./utils/constants'),
-    getAppName = constants.getAppName,
-    getUniqueCssClass = constants.getUniqueCssClass;
-var isDescendantOf = require('./utils/dom').isDescendantOf;
-
-/*
-*   bookmarklet wrapper
-*/
-(function () {
-  initLandmarks().run()
-})();
-
 /*
 *   landmarks.js: highlight ARIA landmarks
 */
+
+import { Bookmarklet } from './Bookmarklet';
+import { InfoObject } from './InfoObject';
+import { getAppName, getUniqueCssClass } from './utils/constants';
+import { isDescendantOf } from './utils/dom';
+
+(function () {
+  initLandmarks().run()
+})();
 
 function initLandmarks () {
   const appName  = getAppName('Landmarks');
