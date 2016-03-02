@@ -7,7 +7,7 @@ import { InfoObject } from './InfoObject';
 import { getAppName, getUniqueCssClass } from './utils/constants';
 
 (function () {
-  initForms().run()
+  initForms().run();
 })();
 
 function initForms () {

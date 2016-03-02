@@ -8,7 +8,7 @@ import { getAppName, getUniqueCssClass } from './utils/constants';
 import { countChildrenWithTagNames } from './utils/dom';
 
 (function () {
-  initLists().run()
+  initLists().run();
 })();
 
 function initLists () {

@@ -7,11 +7,11 @@ import { InfoObject } from './InfoObject';
 import { getAppName, getUniqueCssClass } from './utils/constants';
 
 (function () {
-  initHeadings().run()
+  initHeadings().run();
 })();
 
 function initHeadings () {
-  const appName  = getAppName('Headings')
+  const appName  = getAppName('Headings');
   const cssClass = getUniqueCssClass('Headings');
 
   let targetList = [

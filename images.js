@@ -7,11 +7,11 @@ import { InfoObject } from './InfoObject';
 import { getAppName, getUniqueCssClass } from './utils/constants';
 
 (function () {
-  initImages().run()
+  initImages().run();
 })();
 
 function initImages () {
-  const appName  = getAppName('Images')
+  const appName  = getAppName('Images');
   const cssClass = getUniqueCssClass('Images');
 
   let targetList = [

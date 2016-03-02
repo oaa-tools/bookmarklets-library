@@ -8,7 +8,7 @@ import { getAppName, getUniqueCssClass } from './utils/constants';
 import { isDescendantOf } from './utils/dom';
 
 (function () {
-  initLandmarks().run()
+  initLandmarks().run();
 })();
 
 function initLandmarks () {
