@@ -36,10 +36,13 @@ function initLandmarks () {
   }
 
   let targetList = [
-    {selector: 'aside:not([role]), [role~="complementary"], [role~="COMPLEMENTARY"]',         color: "brown",  label: "complementary"},
+    {selector: 'aside:not([role]), [role~="complementary"], [role~="COMPLEMENTARY"]',         color: "maroon", label: "complementary"},
     {selector: 'footer, [role~="contentinfo"], [role~="CONTENTINFO"]', filter: isContentinfo, color: "olive",  label: "contentinfo"},
-    {selector: '[role~="application"], [role~="APPLICATION"]',                                color: "teal",   label: "application"},
+    {selector: '[role~="application"], [role~="APPLICATION"]',                                color: "black",  label: "application"},
     {selector: 'nav, [role~="navigation"], [role~="NAVIGATION"]',                             color: "green",  label: "navigation"},
+    {selector: '[role~="region"][aria-labelledby], [role~="REGION"][aria-labelledby]',        color: "teal",   label: "region"},
+    {selector: '[role~="region"][aria-label], [role~="REGION"][aria-label]',                  color: "teal",   label: "region"},
+    {selector: 'section[aria-labelledby], section[aria-label]',                               color: "teal",   label: "region"},
     {selector: 'header, [role~="banner"], [role~="BANNER"]', filter: isBanner,                color: "gray",   label: "banner"},
     {selector: '[role~="search"], [role~="SEARCH"]',                                          color: "purple", label: "search"},
     {selector: 'main, [role~="main"], [role~="MAIN"]',                                        color: "navy",   label: "main"}
