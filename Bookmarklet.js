@@ -42,4 +42,6 @@ Bookmarklet.prototype.run = function () {
   else {
     removeNodes(this.cssClass);
   }
+
+  return this.show;
 };
