@@ -216,7 +216,7 @@ function Bookmarklet (params) {
     return window[globalName];
 
   this.appName  = params.appName;
-  this.cssClass = params.cssClass
+  this.cssClass = params.cssClass;
   this.msgText  = params.msgText;
   this.params   = params;
   this.show     = false;
