@@ -30,9 +30,8 @@
   },
   "scripts": {
     "copy:css": "CSS=./styles.css; cp $CSS build/; cp $CSS extension/",
-    "copy:js": "cp ./hrefutil.js build/",
-    "build": "webpack -p && gulp && npm run copy:css && npm run copy:js",
-    "debug": "webpack    && gulp && npm run copy:css && npm run copy:js",
+    "build": "webpack -p && gulp && npm run copy:css",
+    "debug": "webpack    && gulp && npm run copy:css",
     "lint": "eslint *.js utils/*.js"
   }
 }
