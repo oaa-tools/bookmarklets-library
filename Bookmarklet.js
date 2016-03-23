@@ -7,7 +7,7 @@ import { addNodes, removeNodes } from './utils/dom';
 import { MessageDialog } from './utils/dialog';
 export { Bookmarklet };
 
-/*eslint no-console: 0*/
+/* eslint no-console: 0 */
 function logVersionInfo (appName) {
   console.log(getTitle() + ' v' + getVersion() + ' ' + appName);
 }
