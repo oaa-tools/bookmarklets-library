@@ -4,7 +4,7 @@
 
 import { Bookmarklet } from './Bookmarklet';
 import { InfoObject } from './InfoObject';
-import { getAppName, getUniqueCssClass } from './utils/constants';
+import { getUniqueCssClass } from './utils/constants';
 
 (function () {
   initInteractive().run()
@@ -21,8 +21,6 @@ import { getAppName, getUniqueCssClass } from './utils/constants';
 */
 
 function initInteractive () {
-  const appName  = getAppName('Interactive');
-  const cssClass = getUniqueCssClass('Interactive');
 
   let targetList = [
     // interactive elements defined in HTML5 spec
@@ -63,14 +61,14 @@ function initInteractive () {
   }
 
   let params = {
-    msgTitle:   "Interactive",
+    appName:    "Interactive",
+    cssClass:   getUniqueCssClass("Interactive"),
     msgText:    "No interactive elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     evalInfo:   evalInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }

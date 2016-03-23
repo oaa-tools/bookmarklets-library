@@ -2,17 +2,25 @@
 *   Bookmarklet.js
 */
 
+import { getGlobalName, getTitle, getVersion } from './utils/constants';
 import { addNodes, removeNodes } from './utils/dom';
 import { MessageDialog } from './utils/dialog';
 export { Bookmarklet };
 
-function Bookmarklet (globalName, params) {
+/*eslint no-console: 0*/
+function logVersionInfo (appName) {
+  console.log(getTitle() + ' v' + getVersion() + ' ' + appName);
+}
+
+function Bookmarklet (params) {
+  let globalName = getGlobalName(params.appName);
+
   // use singleton pattern
   if (typeof window[globalName] === 'object')
     return window[globalName];
 
-  this.cssClass = params.cssClass;
-  this.msgTitle = params.msgTitle;
+  this.appName  = params.appName;
+  this.cssClass = params.cssClass
   this.msgText  = params.msgText;
   this.params   = params;
   this.show     = false;
@@ -25,6 +33,7 @@ function Bookmarklet (globalName, params) {
   });
 
   window[globalName] = this;
+  logVersionInfo(this.appName);
 }
 
 Bookmarklet.prototype.run = function () {
@@ -35,7 +44,7 @@ Bookmarklet.prototype.run = function () {
 
   if (this.show) {
     if (addNodes(this.params) === 0) {
-      dialog.show(this.msgTitle, this.msgText);
+      dialog.show(this.appName, this.msgText);
       this.show = false;
     }
   }

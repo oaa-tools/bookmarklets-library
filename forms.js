@@ -4,15 +4,13 @@
 
 import { Bookmarklet } from './Bookmarklet';
 import { InfoObject } from './InfoObject';
-import { getAppName, getUniqueCssClass } from './utils/constants';
+import { getUniqueCssClass } from './utils/constants';
 
 (function () {
   initForms().run();
 })();
 
 function initForms () {
-  const appName  = getAppName('Forms');
-  const cssClass = getUniqueCssClass('Forms');
 
   let targetList = [
     {selector: "button",   color: "purple", label: "button"},
@@ -32,13 +30,13 @@ function initForms () {
   }
 
   let params = {
-    msgTitle:   "Forms",
+    appName:    "Forms",
+    cssClass:   getUniqueCssClass("Forms"),
     msgText:    "No form-related elements found: <ul>" + selectors + "</ul>",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }

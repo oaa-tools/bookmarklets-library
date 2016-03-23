@@ -3,8 +3,6 @@
 */
 
 function initForms () {
-  const appName  = getAppName('Forms');
-  const cssClass = getUniqueCssClass('Forms');
 
   let targetList = [
     {selector: "button",   color: "purple", label: "button"},
@@ -24,15 +22,15 @@ function initForms () {
   }
 
   let params = {
-    msgTitle:   "Forms",
+    appName:    "Forms",
+    cssClass:   getUniqueCssClass("Forms"),
     msgText:    "No form-related elements found: <ul>" + selectors + "</ul>",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }
 
 /*
@@ -40,8 +38,6 @@ function initForms () {
 */
 
 function initHeadings () {
-  const appName  = getAppName('Headings');
-  const cssClass = getUniqueCssClass('Headings');
 
   let targetList = [
     {selector: "h1", color: "navy",   label: "h1"},
@@ -61,15 +57,15 @@ function initHeadings () {
   }
 
   let params = {
-    msgTitle:   "Headings",
+    appName:    "Headings",
+    cssClass:   getUniqueCssClass("Headings"),
     msgText:    "No heading elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }
 
 /*
@@ -77,8 +73,6 @@ function initHeadings () {
 */
 
 function initImages () {
-  const appName  = getAppName('Images');
-  const cssClass = getUniqueCssClass('Images');
 
   let targetList = [
     {selector: "area", color: "teal",   label: "area"},
@@ -93,15 +87,15 @@ function initImages () {
   }
 
   let params = {
-    msgTitle:   "Images",
+    appName:    "Images",
+    cssClass:   getUniqueCssClass("Images"),
     msgText:    "No image elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }
 
 /*
@@ -109,8 +103,6 @@ function initImages () {
 */
 
 function initLandmarks () {
-  const appName  = getAppName('Landmarks');
-  const cssClass = getUniqueCssClass('Landmarks');
 
   // Filter function called on a list of elements returned by selector
   // 'footer, [role="contentinfo"]'. It returns true for the following
@@ -152,15 +144,15 @@ function initLandmarks () {
   }
 
   let params = {
-    msgTitle:   "Landmarks",
+    appName:    "Landmarks",
+    cssClass:   getUniqueCssClass("Landmarks"),
     msgText:    "No elements with ARIA Landmark roles found: <ul>" + selectors + "</ul>",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }
 
 /*
@@ -168,8 +160,6 @@ function initLandmarks () {
 */
 
 function initLists () {
-  const appName  = getAppName('Lists');
-  const cssClass = getUniqueCssClass('Lists');
 
   let targetList = [
     {selector: "dl", color: "olive",  label: "dl"},
@@ -198,28 +188,35 @@ function initLists () {
   }
 
   let params = {
-    msgTitle:   "Lists",
+    appName:    "Lists",
+    cssClass:   getUniqueCssClass("Lists"),
     msgText:    "No list elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }
 
 /*
 *   Bookmarklet.js
 */
 
-function Bookmarklet (globalName, params) {
+/*eslint no-console: 0*/
+function logVersionInfo (appName) {
+  console.log(getTitle() + ' v' + getVersion() + ' ' + appName);
+}
+
+function Bookmarklet (params) {
+  let globalName = getGlobalName(params.appName);
+
   // use singleton pattern
   if (typeof window[globalName] === 'object')
     return window[globalName];
 
-  this.cssClass = params.cssClass;
-  this.msgTitle = params.msgTitle;
+  this.appName  = params.appName;
+  this.cssClass = params.cssClass
   this.msgText  = params.msgText;
   this.params   = params;
   this.show     = false;
@@ -232,6 +229,7 @@ function Bookmarklet (globalName, params) {
   });
 
   window[globalName] = this;
+  logVersionInfo(this.appName);
 }
 
 Bookmarklet.prototype.run = function () {
@@ -242,15 +240,13 @@ Bookmarklet.prototype.run = function () {
 
   if (this.show) {
     if (addNodes(this.params) === 0) {
-      dialog.show(this.msgTitle, this.msgText);
+      dialog.show(this.appName, this.msgText);
       this.show = false;
     }
   }
   else {
     removeNodes(this.cssClass);
   }
-
-  return this.show;
 };
 
 /*
@@ -296,17 +292,19 @@ InfoObject.prototype.addProps = function (val) {
 */
 
 var CONSTANTS = {};
-Object.defineProperty(CONSTANTS, 'appPrefix',   { value: 'a11y' });
-Object.defineProperty(CONSTANTS, 'classPrefix', { value: 'a11yGfdXALm' });
+Object.defineProperty(CONSTANTS, 'classPrefix',  { value: 'a11yGfdXALm' });
+Object.defineProperty(CONSTANTS, 'globalPrefix', { value: 'a11y' });
+Object.defineProperty(CONSTANTS, 'title',        { value: 'oaa-tools/bookmarklets' });
+Object.defineProperty(CONSTANTS, 'version',      { value: '0.2.1' });
 
-function getAppName (name) {
-  return CONSTANTS.appPrefix + name;
+function getGlobalName (appName) {
+  return CONSTANTS.globalPrefix + appName;
 }
 
-function getUniqueCssClass (name) {
+function getUniqueCssClass (appName) {
   const prefix = CONSTANTS.classPrefix;
 
-  switch (name) {
+  switch (appName) {
     case 'Forms':       return prefix + '0';
     case 'Headings':    return prefix + '1';
     case 'Images':      return prefix + '2';
@@ -317,6 +315,9 @@ function getUniqueCssClass (name) {
 
   return 'unrecognizedName';
 }
+
+function getTitle ()   { return CONSTANTS.title }
+function getVersion () { return CONSTANTS.version }
 
 /*
 *   dialog.js: functions for creating, modifying and deleting message dialog
@@ -1403,6 +1404,35 @@ function addDragAndDrop (node) {
 */
 
 /*
+*   initFind: Add polyfill for Array find method defined in ES6. From MDN page:
+*   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+*/
+function initFind () {
+  if (!Array.prototype.find) {
+    Array.prototype.find = function (predicate) {
+      if (this === null) {
+        throw new TypeError('Array.prototype.find called on null or undefined');
+      }
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
+      }
+      var list = Object(this);
+      var length = list.length >>> 0;
+      var thisArg = arguments[1];
+      var value;
+
+      for (var i = 0; i < length; i++) {
+        value = list[i];
+        if (predicate.call(thisArg, value, i, list)) {
+          return value;
+        }
+      }
+      return undefined;
+    };
+  }
+}
+
+/*
 *   inListOfOptions: Determine whether element is a child of
 *   1. a select element
 *   2. an optgroup element that is a child of a select element
@@ -1514,6 +1544,7 @@ var validRoles = [
 */
 function getValidRole (spaceSepList) {
   let arr = spaceSepList.split(' ');
+  initFind();
 
   for (let i = 0; i < arr.length; i++) {
     let value = arr[i].toLowerCase();
@@ -1688,6 +1719,7 @@ function nameFromIncludesContents (element) {
     'treeitem'
   ];
 
+  initFind();
   let contentsRole = contentsRoles.find(role => role === elementRole);
   return (typeof contentsRole !== 'undefined');
 }

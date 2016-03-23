@@ -4,15 +4,13 @@
 
 import { Bookmarklet } from './Bookmarklet';
 import { InfoObject } from './InfoObject';
-import { getAppName, getUniqueCssClass } from './utils/constants';
+import { getUniqueCssClass } from './utils/constants';
 
 (function () {
   initImages().run();
 })();
 
 function initImages () {
-  const appName  = getAppName('Images');
-  const cssClass = getUniqueCssClass('Images');
 
   let targetList = [
     {selector: "area", color: "teal",   label: "area"},
@@ -27,13 +25,13 @@ function initImages () {
   }
 
   let params = {
-    msgTitle:   "Images",
+    appName:    "Images",
+    cssClass:   getUniqueCssClass("Images"),
     msgText:    "No image elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }

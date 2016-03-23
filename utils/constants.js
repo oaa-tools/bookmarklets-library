@@ -2,20 +2,22 @@
 *   constants.js
 */
 
-export { getAppName, getUniqueCssClass };
+export { getGlobalName, getTitle, getUniqueCssClass, getVersion };
 
 var CONSTANTS = {};
-Object.defineProperty(CONSTANTS, 'appPrefix',   { value: 'a11y' });
-Object.defineProperty(CONSTANTS, 'classPrefix', { value: 'a11yGfdXALm' });
+Object.defineProperty(CONSTANTS, 'classPrefix',  { value: 'a11yGfdXALm' });
+Object.defineProperty(CONSTANTS, 'globalPrefix', { value: 'a11y' });
+Object.defineProperty(CONSTANTS, 'title',        { value: 'oaa-tools/bookmarklets' });
+Object.defineProperty(CONSTANTS, 'version',      { value: '0.2.1' });
 
-function getAppName (name) {
-  return CONSTANTS.appPrefix + name;
+function getGlobalName (appName) {
+  return CONSTANTS.globalPrefix + appName;
 }
 
-function getUniqueCssClass (name) {
+function getUniqueCssClass (appName) {
   const prefix = CONSTANTS.classPrefix;
 
-  switch (name) {
+  switch (appName) {
     case 'Forms':       return prefix + '0';
     case 'Headings':    return prefix + '1';
     case 'Images':      return prefix + '2';
@@ -26,3 +28,6 @@ function getUniqueCssClass (name) {
 
   return 'unrecognizedName';
 }
+
+function getTitle ()   { return CONSTANTS.title }
+function getVersion () { return CONSTANTS.version }

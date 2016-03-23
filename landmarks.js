@@ -4,7 +4,7 @@
 
 import { Bookmarklet } from './Bookmarklet';
 import { InfoObject } from './InfoObject';
-import { getAppName, getUniqueCssClass } from './utils/constants';
+import { getUniqueCssClass } from './utils/constants';
 import { isDescendantOf } from './utils/dom';
 
 (function () {
@@ -12,8 +12,6 @@ import { isDescendantOf } from './utils/dom';
 })();
 
 function initLandmarks () {
-  const appName  = getAppName('Landmarks');
-  const cssClass = getUniqueCssClass('Landmarks');
 
   // Filter function called on a list of elements returned by selector
   // 'footer, [role="contentinfo"]'. It returns true for the following
@@ -55,13 +53,13 @@ function initLandmarks () {
   }
 
   let params = {
-    msgTitle:   "Landmarks",
+    appName:    "Landmarks",
+    cssClass:   getUniqueCssClass("Landmarks"),
     msgText:    "No elements with ARIA Landmark roles found: <ul>" + selectors + "</ul>",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }

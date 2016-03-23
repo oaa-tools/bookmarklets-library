@@ -4,7 +4,7 @@
 
 import { Bookmarklet } from './Bookmarklet';
 import { InfoObject } from './InfoObject';
-import { getAppName, getUniqueCssClass } from './utils/constants';
+import { getUniqueCssClass } from './utils/constants';
 import { countChildrenWithTagNames } from './utils/dom';
 
 (function () {
@@ -12,8 +12,6 @@ import { countChildrenWithTagNames } from './utils/dom';
 })();
 
 function initLists () {
-  const appName  = getAppName('Lists');
-  const cssClass = getUniqueCssClass('Lists');
 
   let targetList = [
     {selector: "dl", color: "olive",  label: "dl"},
@@ -42,13 +40,13 @@ function initLists () {
   }
 
   let params = {
-    msgTitle:   "Lists",
+    appName:    "Lists",
+    cssClass:   getUniqueCssClass("Lists"),
     msgText:    "No list elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }

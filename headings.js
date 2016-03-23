@@ -4,15 +4,13 @@
 
 import { Bookmarklet } from './Bookmarklet';
 import { InfoObject } from './InfoObject';
-import { getAppName, getUniqueCssClass } from './utils/constants';
+import { getUniqueCssClass } from './utils/constants';
 
 (function () {
   initHeadings().run();
 })();
 
 function initHeadings () {
-  const appName  = getAppName('Headings');
-  const cssClass = getUniqueCssClass('Headings');
 
   let targetList = [
     {selector: "h1", color: "navy",   label: "h1"},
@@ -32,13 +30,13 @@ function initHeadings () {
   }
 
   let params = {
-    msgTitle:   "Headings",
+    appName:    "Headings",
+    cssClass:   getUniqueCssClass("Headings"),
     msgText:    "No heading elements (" + selectors + ") found.",
     targetList: targetList,
-    cssClass:   cssClass,
     getInfo:    getInfo,
     dndFlag:    true
   };
 
-  return new Bookmarklet(appName, params);
+  return new Bookmarklet(params);
 }
