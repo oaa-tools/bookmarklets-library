@@ -3,8 +3,8 @@
 */
 
 import { Bookmarklet } from './Bookmarklet';
-import { InfoObject } from './InfoObject';
-import { getUniqueCssClass } from './utils/constants';
+import { InfoObject }  from './InfoObject';
+import { getCssClass } from './utils/constants';
 
 (function () {
   initImages().run();
@@ -26,7 +26,7 @@ function initImages () {
 
   let params = {
     appName:    "Images",
-    cssClass:   getUniqueCssClass("Images"),
+    cssClass:   getCssClass("Images"),
     msgText:    "No image elements (" + selectors + ") found.",
     targetList: targetList,
     getInfo:    getInfo,

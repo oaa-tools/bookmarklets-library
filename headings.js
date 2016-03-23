@@ -3,8 +3,8 @@
 */
 
 import { Bookmarklet } from './Bookmarklet';
-import { InfoObject } from './InfoObject';
-import { getUniqueCssClass } from './utils/constants';
+import { InfoObject }  from './InfoObject';
+import { getCssClass } from './utils/constants';
 
 (function () {
   initHeadings().run();
@@ -31,7 +31,7 @@ function initHeadings () {
 
   let params = {
     appName:    "Headings",
-    cssClass:   getUniqueCssClass("Headings"),
+    cssClass:   getCssClass("Headings"),
     msgText:    "No heading elements (" + selectors + ") found.",
     targetList: targetList,
     getInfo:    getInfo,

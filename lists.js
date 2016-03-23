@@ -3,8 +3,8 @@
 */
 
 import { Bookmarklet } from './Bookmarklet';
-import { InfoObject } from './InfoObject';
-import { getUniqueCssClass } from './utils/constants';
+import { InfoObject }  from './InfoObject';
+import { getCssClass } from './utils/constants';
 import { countChildrenWithTagNames } from './utils/dom';
 
 (function () {
@@ -41,7 +41,7 @@ function initLists () {
 
   let params = {
     appName:    "Lists",
-    cssClass:   getUniqueCssClass("Lists"),
+    cssClass:   getCssClass("Lists"),
     msgText:    "No list elements (" + selectors + ") found.",
     targetList: targetList,
     getInfo:    getInfo,

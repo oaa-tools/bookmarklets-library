@@ -3,8 +3,8 @@
 */
 
 import { Bookmarklet } from './Bookmarklet';
-import { InfoObject } from './InfoObject';
-import { getUniqueCssClass } from './utils/constants';
+import { InfoObject }  from './InfoObject';
+import { getCssClass } from './utils/constants';
 import { isDescendantOf } from './utils/dom';
 
 (function () {
@@ -54,7 +54,7 @@ function initLandmarks () {
 
   let params = {
     appName:    "Landmarks",
-    cssClass:   getUniqueCssClass("Landmarks"),
+    cssClass:   getCssClass("Landmarks"),
     msgText:    "No elements with ARIA Landmark roles found: <ul>" + selectors + "</ul>",
     targetList: targetList,
     getInfo:    getInfo,

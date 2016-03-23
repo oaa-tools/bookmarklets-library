@@ -23,7 +23,7 @@ function initForms () {
 
   let params = {
     appName:    "Forms",
-    cssClass:   getUniqueCssClass("Forms"),
+    cssClass:   getCssClass("Forms"),
     msgText:    "No form-related elements found: <ul>" + selectors + "</ul>",
     targetList: targetList,
     getInfo:    getInfo,
@@ -58,7 +58,7 @@ function initHeadings () {
 
   let params = {
     appName:    "Headings",
-    cssClass:   getUniqueCssClass("Headings"),
+    cssClass:   getCssClass("Headings"),
     msgText:    "No heading elements (" + selectors + ") found.",
     targetList: targetList,
     getInfo:    getInfo,
@@ -88,7 +88,7 @@ function initImages () {
 
   let params = {
     appName:    "Images",
-    cssClass:   getUniqueCssClass("Images"),
+    cssClass:   getCssClass("Images"),
     msgText:    "No image elements (" + selectors + ") found.",
     targetList: targetList,
     getInfo:    getInfo,
@@ -145,7 +145,7 @@ function initLandmarks () {
 
   let params = {
     appName:    "Landmarks",
-    cssClass:   getUniqueCssClass("Landmarks"),
+    cssClass:   getCssClass("Landmarks"),
     msgText:    "No elements with ARIA Landmark roles found: <ul>" + selectors + "</ul>",
     targetList: targetList,
     getInfo:    getInfo,
@@ -189,7 +189,7 @@ function initLists () {
 
   let params = {
     appName:    "Lists",
-    cssClass:   getUniqueCssClass("Lists"),
+    cssClass:   getCssClass("Lists"),
     msgText:    "No list elements (" + selectors + ") found.",
     targetList: targetList,
     getInfo:    getInfo,
@@ -203,7 +203,7 @@ function initLists () {
 *   Bookmarklet.js
 */
 
-/*eslint no-console: 0*/
+/* eslint no-console: 0 */
 function logVersionInfo (appName) {
   console.log(getTitle() + ' v' + getVersion() + ' ' + appName);
 }
@@ -297,11 +297,7 @@ Object.defineProperty(CONSTANTS, 'globalPrefix', { value: 'a11y' });
 Object.defineProperty(CONSTANTS, 'title',        { value: 'oaa-tools/bookmarklets' });
 Object.defineProperty(CONSTANTS, 'version',      { value: '0.2.1' });
 
-function getGlobalName (appName) {
-  return CONSTANTS.globalPrefix + appName;
-}
-
-function getUniqueCssClass (appName) {
+function getCssClass (appName) {
   const prefix = CONSTANTS.classPrefix;
 
   switch (appName) {
@@ -314,6 +310,10 @@ function getUniqueCssClass (appName) {
   }
 
   return 'unrecognizedName';
+}
+
+function getGlobalName (appName) {
+  return CONSTANTS.globalPrefix + appName;
 }
 
 function getTitle ()   { return CONSTANTS.title }

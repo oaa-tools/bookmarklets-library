@@ -3,8 +3,8 @@
 */
 
 import { Bookmarklet } from './Bookmarklet';
-import { InfoObject } from './InfoObject';
-import { getUniqueCssClass } from './utils/constants';
+import { InfoObject }  from './InfoObject';
+import { getCssClass } from './utils/constants';
 
 (function () {
   initForms().run();
@@ -31,7 +31,7 @@ function initForms () {
 
   let params = {
     appName:    "Forms",
-    cssClass:   getUniqueCssClass("Forms"),
+    cssClass:   getCssClass("Forms"),
     msgText:    "No form-related elements found: <ul>" + selectors + "</ul>",
     targetList: targetList,
     getInfo:    getInfo,

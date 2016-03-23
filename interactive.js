@@ -3,8 +3,8 @@
 */
 
 import { Bookmarklet } from './Bookmarklet';
-import { InfoObject } from './InfoObject';
-import { getUniqueCssClass } from './utils/constants';
+import { InfoObject }  from './InfoObject';
+import { getCssClass } from './utils/constants';
 
 (function () {
   initInteractive().run()
@@ -62,7 +62,7 @@ function initInteractive () {
 
   let params = {
     appName:    "Interactive",
-    cssClass:   getUniqueCssClass("Interactive"),
+    cssClass:   getCssClass("Interactive"),
     msgText:    "No interactive elements (" + selectors + ") found.",
     targetList: targetList,
     getInfo:    getInfo,
