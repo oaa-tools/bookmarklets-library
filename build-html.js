@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 /* The url defaults to localhost for development. */
 /* To override, pass in as command-line argument. */
 var url = process.argv[2] || "http://localhost/bookmarklets/";
