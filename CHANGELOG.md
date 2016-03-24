@@ -16,12 +16,14 @@
   of the bookmarklet links based on the given URL.
 
 * Added an ```Array.prototype.find``` method polyfill (from Mozilla MDN) to
-  compensate for IE's lack of support for the ES6 find method.
+  compensate for IE's lack of support for the ES6 ```find``` method.
 
-* Added version information for bookmarklets-library in ```constants.js```,
+* Added bookmarklets-library version information in ```constants.js```,
   starting with ```v0.2.1```. The same version ID is shared by all bookmarklets
   in the library and was added for improved issue tracking.
 
 * Added ```console.log``` call to display bookmarklet title and version
-  information in the browser console. The message only appears when a bookmarklet
-  is loaded for a particular page (called from ```Bookmarklet.js``` constructor).
+  information in the browser console. The message only appears when a
+  bookmarklet is first activated for a particular page (called from the
+  ```Bookmarklet.js``` constructor method). Subsequent toggling prior to
+  reloading the page does not cause the message to redisplay.
