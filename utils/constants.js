@@ -8,7 +8,7 @@ var CONSTANTS = {};
 Object.defineProperty(CONSTANTS, 'classPrefix',  { value: 'a11yGfdXALm' });
 Object.defineProperty(CONSTANTS, 'globalPrefix', { value: 'a11y' });
 Object.defineProperty(CONSTANTS, 'title',        { value: 'oaa-tools/bookmarklets' });
-Object.defineProperty(CONSTANTS, 'version',      { value: '0.2.1' });
+Object.defineProperty(CONSTANTS, 'version',      { value: '0.2.2' });
 
 function getCssClass (appName) {
   const prefix = CONSTANTS.classPrefix;
