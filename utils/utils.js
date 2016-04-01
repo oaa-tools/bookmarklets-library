@@ -2,7 +2,7 @@
 *   utils.js: utility functions
 */
 
-export { getScrollOffsets, drag };
+export { getScrollOffsets, drag, addPolyfills };
 
 /*
 *   getScrollOffsets: Use x and y scroll offsets to calculate positioning
@@ -93,5 +93,54 @@ function drag (elementToDrag, dragCallback, event) {
 
     if (e.stopPropagation) e.stopPropagation();
     else e.cancelBubble = true;
+  }
+}
+
+/*
+*   addPolyfills: Add polyfill implementations for JavaScript object methods
+*   defined in ES6 and used by bookmarklets:
+*   1. Array.prototype.find
+*   2. String.prototype.includes
+*/
+function addPolyfills () {
+
+  // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+  if (!Array.prototype.find) {
+    Array.prototype.find = function (predicate) {
+      if (this === null) {
+        throw new TypeError('Array.prototype.find called on null or undefined');
+      }
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
+      }
+      var list = Object(this);
+      var length = list.length >>> 0;
+      var thisArg = arguments[1];
+      var value;
+
+      for (var i = 0; i < length; i++) {
+        value = list[i];
+        if (predicate.call(thisArg, value, i, list)) {
+          return value;
+        }
+      }
+      return undefined;
+    };
+  }
+
+  // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
+  if (!String.prototype.includes) {
+    String.prototype.includes = function (search, start) {
+      if (typeof start !== 'number') {
+        start = 0;
+      }
+
+      if (start + search.length > this.length) {
+        return false;
+      }
+      else {
+        return this.indexOf(search, start) !== -1;
+      }
+    };
   }
 }
