@@ -9,7 +9,7 @@ export { Bookmarklet };
 
 /* eslint no-console: 0 */
 function logVersionInfo (appName) {
-  console.log(getTitle() + ' v' + getVersion() + ' ' + appName);
+  console.log(getTitle() + ' : v' + getVersion() + ' : ' + appName);
 }
 
 function Bookmarklet (params) {
