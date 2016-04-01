@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v0.2.2 &mdash; 2016-04-01
+
+* Added a ```String.prototype.includes``` method polyfill (from Mozilla MDN) to
+  compensate for IE's lack of support for the ES6 ```includes``` method.
+
+* Added function ```addPolyfills``` to ```utils/utils.js``` and moved the
+  ```String.prototype.includes``` and ```Array.prototype.find``` polyfill
+  code into it. This function is now called by each top-level bookmarklet
+  script in its ```init*``` function.
+
 ## v0.2.1 &mdash; 2016-03-23
 
 * Removed the ```return false``` statement from the Bookmarklet ```run```
