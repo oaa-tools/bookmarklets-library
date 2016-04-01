@@ -1,5 +1,6 @@
+# Version Information for Bookmarklets
 
-I have added a version ID and version logging to the bookmarklets-library repository, to facilitate issue tracking. I arbitrarily chose v0.2.1 as the starting version, because is seems like we are at least at version 2 of pre-release.
+A version ID and version logging has been added to the bookmarklets-library repository, to facilitate issue tracking. This information is currently available from the browser console.
 
 ## Launching the Browser Console
 
@@ -27,6 +28,5 @@ The log message for each bookmarklet only displays once per page load and bookma
 
 The format of log messages is ```<organization/project>``` ```<version>``` ```<bookmarklet name>```. For example,
 
-* ```oaa-tools/bookmarklets v0.2.1 Landmarks```
-* ```oaa-tools/bookmarklets v0.2.1 Headings```
-
+* ```oaa-tools/bookmarklets : v0.2.2 : Landmarks```
+* ```oaa-tools/bookmarklets : v0.2.2 : Headings```
