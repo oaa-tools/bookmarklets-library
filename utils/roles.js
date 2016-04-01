@@ -12,35 +12,6 @@ import { getAttributeValue, hasEmptyAltText } from './namefrom';
 export { getValidRole, getAriaRole, nameFromIncludesContents };
 
 /*
-*   initFind: Add polyfill for Array find method defined in ES6. From MDN page:
-*   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-*/
-function initFind () {
-  if (!Array.prototype.find) {
-    Array.prototype.find = function (predicate) {
-      if (this === null) {
-        throw new TypeError('Array.prototype.find called on null or undefined');
-      }
-      if (typeof predicate !== 'function') {
-        throw new TypeError('predicate must be a function');
-      }
-      var list = Object(this);
-      var length = list.length >>> 0;
-      var thisArg = arguments[1];
-      var value;
-
-      for (var i = 0; i < length; i++) {
-        value = list[i];
-        if (predicate.call(thisArg, value, i, list)) {
-          return value;
-        }
-      }
-      return undefined;
-    };
-  }
-}
-
-/*
 *   inListOfOptions: Determine whether element is a child of
 *   1. a select element
 *   2. an optgroup element that is a child of a select element
@@ -152,7 +123,6 @@ var validRoles = [
 */
 function getValidRole (spaceSepList) {
   let arr = spaceSepList.split(' ');
-  initFind();
 
   for (let i = 0; i < arr.length; i++) {
     let value = arr[i].toLowerCase();
@@ -327,7 +297,6 @@ function nameFromIncludesContents (element) {
     'treeitem'
   ];
 
-  initFind();
   let contentsRole = contentsRoles.find(role => role === elementRole);
   return (typeof contentsRole !== 'undefined');
 }
