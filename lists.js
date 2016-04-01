@@ -2,16 +2,19 @@
 *   lists.js: highlight list elements
 */
 
-import { Bookmarklet } from './Bookmarklet';
-import { InfoObject }  from './InfoObject';
-import { getCssClass } from './utils/constants';
+import { Bookmarklet }  from './Bookmarklet';
+import { InfoObject }   from './InfoObject';
+import { getCssClass }  from './utils/constants';
 import { countChildrenWithTagNames } from './utils/dom';
+import { addPolyfills } from './utils/utils';
 
 (function () {
   initLists().run();
 })();
 
 function initLists () {
+
+  addPolyfills();
 
   let targetList = [
     {selector: "dl", color: "olive",  label: "dl"},

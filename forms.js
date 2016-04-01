@@ -2,15 +2,18 @@
 *   forms.js: highlight form-related elements
 */
 
-import { Bookmarklet } from './Bookmarklet';
-import { InfoObject }  from './InfoObject';
-import { getCssClass } from './utils/constants';
+import { Bookmarklet }  from './Bookmarklet';
+import { InfoObject }   from './InfoObject';
+import { getCssClass }  from './utils/constants';
+import { addPolyfills } from './utils/utils';
 
 (function () {
   initForms().run();
 })();
 
 function initForms () {
+
+  addPolyfills();
 
   let targetList = [
     {selector: "button",   color: "purple", label: "button"},

@@ -2,9 +2,10 @@
 *   interactive.js: highlight all interactive elements
 */
 
-import { Bookmarklet } from './Bookmarklet';
-import { InfoObject }  from './InfoObject';
-import { getCssClass } from './utils/constants';
+import { Bookmarklet }  from './Bookmarklet';
+import { InfoObject }   from './InfoObject';
+import { getCssClass }  from './utils/constants';
+import { addPolyfills } from './utils/utils';
 
 (function () {
   initInteractive().run()
@@ -21,6 +22,8 @@ import { getCssClass } from './utils/constants';
 */
 
 function initInteractive () {
+
+  addPolyfills();
 
   let targetList = [
     // interactive elements defined in HTML5 spec

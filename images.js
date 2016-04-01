@@ -2,15 +2,18 @@
 *   images.js: highlight image elements
 */
 
-import { Bookmarklet } from './Bookmarklet';
-import { InfoObject }  from './InfoObject';
-import { getCssClass } from './utils/constants';
+import { Bookmarklet }  from './Bookmarklet';
+import { InfoObject }   from './InfoObject';
+import { getCssClass }  from './utils/constants';
+import { addPolyfills } from './utils/utils';
 
 (function () {
   initImages().run();
 })();
 
 function initImages () {
+
+  addPolyfills();
 
   let targetList = [
     {selector: "area", color: "teal",   label: "area"},

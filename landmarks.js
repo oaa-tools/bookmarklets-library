@@ -2,16 +2,19 @@
 *   landmarks.js: highlight ARIA landmarks
 */
 
-import { Bookmarklet } from './Bookmarklet';
-import { InfoObject }  from './InfoObject';
-import { getCssClass } from './utils/constants';
+import { Bookmarklet }  from './Bookmarklet';
+import { InfoObject }   from './InfoObject';
+import { getCssClass }  from './utils/constants';
 import { isDescendantOf } from './utils/dom';
+import { addPolyfills } from './utils/utils';
 
 (function () {
   initLandmarks().run();
 })();
 
 function initLandmarks () {
+
+  addPolyfills();
 
   // Filter function called on a list of elements returned by selector
   // 'footer, [role="contentinfo"]'. It returns true for the following

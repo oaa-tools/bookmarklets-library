@@ -2,15 +2,18 @@
 *   headings.js: highlight heading elements
 */
 
-import { Bookmarklet } from './Bookmarklet';
-import { InfoObject }  from './InfoObject';
-import { getCssClass } from './utils/constants';
+import { Bookmarklet }  from './Bookmarklet';
+import { InfoObject }   from './InfoObject';
+import { getCssClass }  from './utils/constants';
+import { addPolyfills } from './utils/utils';
 
 (function () {
   initHeadings().run();
 })();
 
 function initHeadings () {
+
+  addPolyfills();
 
   let targetList = [
     {selector: "h1", color: "navy",   label: "h1"},
