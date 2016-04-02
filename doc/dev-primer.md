@@ -1,30 +1,48 @@
-Development Guide - Getting Started
+## Development Guide - Getting Started
 
-Go to the parent directory under which the working copy will be created:
+### Go to the parent directory under which a working copy will be created:
 
-  $ cd <parent-directory>
+  ```$ cd <parent-directory>```
 
-Create the working copy of the repository with the 'git clone' command:
+### Create a working copy of the ```bookmarklets-library``` repository
 
-  $ git clone https://github.com/oaa-tools/bookmarklets.git
+  ```$ git clone --recursive https://github.com/oaa-tools/bookmarklets-library.git```
 
-Change directory to the working copy:
+Note: The repo has a submodule, so be sure to use the ```--recursive``` option.
 
-  $ cd bookmarklets
+### Change directory to the working copy
 
-Install all of the dev. dependencies using the 'npm install' command, which
-does so by following the directives in the package.json file:
+  ```$ cd bookmarklets-library```
 
-  $ npm install
+### Install ```npm``` package dependencies
 
-Start coding...
+  ```$ npm install```
 
-When you're ready to do a build (using webpack), use the following command:
+This command follows the directives in the ```package.json``` file.
 
-  $ npm run build
+### Checkout the ```master``` branch of the ```build``` submodule
 
-See the webpack.config.js file for more info on what the build will produce.
+  ```$ cd build```
 
-You can control whether webpack outputs minified JavaScript by editing the
-package.json file: 'webpack -p' -> minified 'production-ready' output, and
-just plain 'webpack' -> non-minified JavaScript.
+  ```$ git checkout master```
+
+Note: If you don't explicitly checkout the ```master``` branch of the submodule, it will remain in a 'detached HEAD' state, which is not what you want if you plan to separately commit and push changes in the submodule.
+
+### Start coding...
+
+  ```$ cd ..```
+
+### Build, using ```webpack```, with the following command
+
+  ```$ npm run build```
+
+See ```package.json``` and ```webpack.config.js``` for more info on what the build will produce.
+
+You can control whether ```webpack``` outputs minified JavaScript by editing the ```package.json``` file:
+
+* ```webpack -p``` # produces minified 'production-ready' output
+* ```webpack``` # with no switches outputs non-minified JavaScript for debugging
+
+### Load ```index.html``` in your browser to install the bookmarklets
+
+The links in ```index.html``` point to the updated bookmarklet scripts in the ```build``` subdirectory.
